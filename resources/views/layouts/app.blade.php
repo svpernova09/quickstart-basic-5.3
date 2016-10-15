@@ -25,8 +25,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/widgets">Widgets</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tasks" name="tasks">Tasks</a></li>
+                    <li><a href="/widgets" name="tasks">Widgets</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

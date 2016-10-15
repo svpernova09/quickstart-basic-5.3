@@ -32,3 +32,13 @@ $factory->define(App\Widget::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(2, 20, 999999),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Task::class, function (Faker\Generator $faker) {
+    $users = App\User::all();
+
+    return [
+        'name' => $faker->sentence(4),
+        'user_id' => $users->random()->id,
+    ];
+});

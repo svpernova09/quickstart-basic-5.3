@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use App\Task;
 use App\Widget;
 
 Route::get('/', function () {
@@ -21,4 +22,11 @@ Route::get('/widgets', function () {
 
     return view('widgets.index')
         ->with('widgets', $widgets);
+});
+
+Route::get('/tasks', function () {
+    $tasks = Task::all();
+
+    return view('tasks.index')
+        ->with('tasks', $tasks);
 });
