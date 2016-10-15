@@ -10,23 +10,41 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use App\Http\Requests\WidgetCreateRequest;
+use App\Http\Requests\TaskCreateRequest;
 use App\Task;
+use App\User;
 use App\Widget;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-Route::get('/widgets', function () {
-    $widgets = Widget::all();
+    Route::get('widgets', 'WidgetController@index')->name('widgets.index');
+    Route::get('widgets/add', 'WidgetController@add')->name('widgets.add');
+    Route::post('widgets', 'WidgetController@create')->name('widgets.create');
 
-    return view('widgets.index')
-        ->with('widgets', $widgets);
-});
+    Route::get('/tasks', function () {
+        $tasks = Task::all();
 
-Route::get('/tasks', function () {
-    $tasks = Task::all();
+        return view('tasks.index')
+            ->with('tasks', $tasks);
+    });
 
-    return view('tasks.index')
-        ->with('tasks', $tasks);
+    Route::get('/tasks/add', function () {
+        $users = User::all();
+
+        return view('tasks.add')
+            ->with('users', $users);
+    });
+
+    Route::post('/tasks', function (TaskCreateRequest $request) {
+        $task = new Task();
+        $task->name = $request->name;
+        $task->user_id = $request->user_id;
+        $task->save();
+
+        return redirect()->to('/tasks');
+    });
 });

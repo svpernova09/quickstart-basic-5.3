@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class WidgetsTest extends TestCase
 {
     use DatabaseTransactions;
-    
+
     public function testWidgetsRoute()
     {
         $this->visit('/widgets')
