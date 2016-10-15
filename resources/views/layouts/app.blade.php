@@ -27,6 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tasks" name="tasks">Tasks</a></li>
+                    <li><a href="/users" name="tasks">Users</a></li>
                     <li><a href="/widgets" name="tasks">Widgets</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
