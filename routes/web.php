@@ -10,11 +10,15 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-Route::group(['middleware' => 'web'], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+Auth::routes();
 
+Route::get('/home', 'HomeController@index');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('widgets', 'WidgetController@index')->name('widgets.index');
     Route::get('widgets/add', 'WidgetController@add')->name('widgets.add');
     Route::post('widgets', 'WidgetController@create')->name('widgets.create');

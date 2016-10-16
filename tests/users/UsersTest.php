@@ -10,7 +10,10 @@ class UsersTest extends TestCase
 
     public function testUsersRoute()
     {
-        $this->visit('/users')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/users')
             ->see('Users Index');
 
         $this->assertResponseOk();
@@ -18,14 +21,20 @@ class UsersTest extends TestCase
 
     public function testUsersNavigation()
     {
-        $this->visit('/')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/')
             ->click('Users')
             ->seePageIs('/users');
     }
 
     public function testUsersViewHasData()
     {
-        $this->visit('/users')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/users')
             ->seePageIs('/users');
 
         $this->assertViewHas('users');
@@ -33,9 +42,10 @@ class UsersTest extends TestCase
 
     public function testDataExists()
     {
-        $user = factory(App\User::class, 1)->create();
+        $user = factory(App\User::class)->create();
 
-        $this->visit('/users')
+        $this->actingAs($user)
+            ->visit('/users')
             ->see($user->name);
     }
 }

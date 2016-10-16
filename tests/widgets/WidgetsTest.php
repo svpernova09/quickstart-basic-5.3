@@ -10,7 +10,10 @@ class WidgetsTest extends TestCase
 
     public function testWidgetsRoute()
     {
-        $this->visit('/widgets')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/widgets')
             ->see('Widgets Index');
 
         $this->assertResponseOk();
@@ -18,14 +21,20 @@ class WidgetsTest extends TestCase
 
     public function testWidgetsNavigation()
     {
-        $this->visit('/')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/')
             ->click('Widgets')
             ->seePageIs('/widgets');
     }
 
     public function testWidgetsViewHasData()
     {
-        $this->visit('/widgets')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/widgets')
             ->seePageIs('/widgets');
 
         $this->assertViewHas('widgets');
@@ -34,8 +43,10 @@ class WidgetsTest extends TestCase
     public function testDataExists()
     {
         $widget = factory(App\Widget::class, 1)->create();
+        $user = factory(App\User::class)->create();
 
-        $this->visit('/widgets')
+        $this->actingAs($user)
+            ->visit('/widgets')
             ->see($widget->name);
     }
 }

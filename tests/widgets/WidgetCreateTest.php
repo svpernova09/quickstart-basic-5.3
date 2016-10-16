@@ -13,7 +13,10 @@ class WidgetCreateTest extends TestCase
      */
     public function testRouteWorks()
     {
-        $this->visit('/widgets/add')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/widgets/add')
             ->see('Add Widget');
 
         $this->assertResponseOk();
@@ -21,7 +24,10 @@ class WidgetCreateTest extends TestCase
 
     public function testFormSubmitWorks()
     {
-        $this->visit('/widgets/add')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/widgets/add')
             ->type('Test Widget', 'name')
             ->type('Great Widget', 'description')
             ->type('49.99', 'price')
@@ -36,7 +42,10 @@ class WidgetCreateTest extends TestCase
 
     public function testFormValidation()
     {
-        $this->visit('/widgets/add')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/widgets/add')
             ->type('Great Widget', 'description')
             ->type('49.99', 'price')
             ->press('Add Widget')

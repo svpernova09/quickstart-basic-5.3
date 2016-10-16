@@ -14,7 +14,10 @@ class TaskCreateTest extends TestCase
      */
     public function testRouteWorks()
     {
-        $this->visit('/tasks/add')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/tasks/add')
             ->see('Add Task');
 
         $this->assertResponseOk();
@@ -22,9 +25,10 @@ class TaskCreateTest extends TestCase
 
     public function testFormSubmitWorks()
     {
-        $user = factory(App\User::class, 1)->create();
+        $user = factory(App\User::class)->create();
 
-        $this->visit('/tasks/add')
+        $this->actingAs($user)
+            ->visit('/tasks/add')
             ->type('Test Task', 'name')
             ->select($user->id, 'user_id')
             ->press('Add Task')
@@ -37,7 +41,10 @@ class TaskCreateTest extends TestCase
 
     public function testFormValidation()
     {
-        $this->visit('/tasks/add')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/tasks/add')
             ->press('Add Task')
             ->seePageIs('/tasks/add');
     }
