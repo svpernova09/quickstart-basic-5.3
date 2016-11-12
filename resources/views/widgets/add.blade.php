@@ -15,21 +15,21 @@
                     <label for="widget-name" class="col-sm-3 control-label">Name</label>
 
                     <div class="col-sm-6">
-                        <input type="text" name="name" id="widget-name" class="form-control" value="">
+                        <input type="text" name="name" id="widget-name" class="form-control" value="{{ old('name') }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="widget-name" class="col-sm-3 control-label">Description</label>
 
                     <div class="col-sm-6">
-                        <input type="text" name="description" id="widget-description" class="form-control" value="">
+                        <input type="text" name="description" id="widget-description" class="form-control" value="{{ old('description') }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="widget-name" class="col-sm-3 control-label">Price</label>
 
                     <div class="col-sm-6">
-                        <input type="text" name="price" id="widget-price" class="form-control" value="">
+                        <input type="text" name="price" id="widget-price" class="form-control" value="{{ old('price') }}">
                     </div>
                 </div>
             </div>
