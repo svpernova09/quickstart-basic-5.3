@@ -1,5 +1,7 @@
 <?php
 
+use App\Task;
+use App\Widget;
 use Illuminate\Http\Request;
 
 /*
@@ -16,3 +18,20 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+
+Route::get('/widgets', function (Request $request) {
+    return Widget::all();
+});
+
+Route::get('/widgets/{id}', function (Request $request) {
+    return Widget::findorFail($request->id);
+});
+
+Route::get('/tasks', function (Request $request) {
+    return Task::with('user')->get();
+});
+
+Route::get('/tasks/{id}', function (Request $request) {
+    return Task::with('user')->findorFail($request->id);
+});
